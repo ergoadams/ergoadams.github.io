@@ -1,8 +1,8 @@
 ## Challenge Name: `Amongst Ourselves: Shipmate / Upload Data`
 
-Category: Misc
-Points: 70
-Solves: 42
+Category: Misc  
+Points: 70  
+Solves: 42  
 
 Challenge Description: 
 ```
@@ -81,8 +81,8 @@ with open("output.png", "wb") as fp:
     fp.write(bytes(output))
 ```
 
-Opening the image revealed this beauty...
-The bottom part of the image is broken cause I never managed to capture the final part of the image sent.
+Opening the image revealed this beauty...  
+The bottom part of the image is broken cause I never managed to capture the final part of the image sent.  
 ![final output](https://ergoadams.github.io/writeups/plaidctf2022/images/redsus.png "final output")
 
 Flag:

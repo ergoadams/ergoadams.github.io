@@ -1,8 +1,8 @@
 ## Challenge Name: `i_c_u / hyperopia`
 
-Category: Misc
-Points: 200
-Solves: 71
+Category: Misc  
+Points: 200  
+Solves: 71  
 
 Challenge Description: 
 ```
@@ -13,14 +13,15 @@ As the first of many upcoming products under this umbrella,
 we introduce i_c_u: the image-collation-utility library. 
 icu.chal.pwni.ng:1337
 ```
+
 The challenge provided us with a rust script that is running on the server, also two images with the texts `sudo please`and `give me the flag` on them.
 From the rust script I was able to figure out that to get the flag you must provide two images, that when OCR-d get the text of `give me the flag`. The images must also have a different hash and have the difference of only 1 bit.
 The image hash is calculated by resizing and grayscaling the image. [(Reference for the hash)](http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html)
 
 ### Approach
 
-It seemed the easiest, to just make a small image that has the correct text on it. By messing around with single bits, I found a solution that changed the image just enough to make the hash change, but keep the text readable.
-I had to use `.jpg` images, cause `.png` files have checksums that prevent changing a single bit while still working.
+It seemed the easiest, to just make a small image that has the correct text on it. By messing around with single bits, I found a solution that changed the image just enough to make the hash change, but keep the text readable.  
+I had to use `.jpg` images, cause `.png` files have checksums that prevent changing a single bit while still working.  
 
 ### Solution
 Solution images used:
