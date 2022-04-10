@@ -1,6 +1,8 @@
 ## Challenge Name: `Amongst Ourselves: Shipmate / Upload Data`
 Category: Misc
+
 Points: 70
+
 Solves: 42
 
 Challenge Description: 
@@ -19,7 +21,9 @@ The challenge provided us with a all the server and client files that are used t
 ### Approach
 
 The `Upload data` minigame had two tasks you had to interact with, both seemingly being just a progress bar. As the game used websockets for connections, Firefox was not able to show the traffic. Using Wireshark I was able to capture the minigames traffic and save it as a seperate file. Looking at the file, I saw multiple packets of base64 data being sent.
+
 ![example of data being sent](https://ergoadams.github.io/writeups/plaidctf2022/images/wireshark.png "example of data being sent")
+
 With a simple python script I was able to extract and decode all of the data.
 ```python
 import base64
@@ -79,6 +83,7 @@ with open("output.png", "wb") as fp:
 ```
 Opening the image revealed this beauty...
 ![final output](https://ergoadams.github.io/writeups/plaidctf2022/images/redsus.png "final output")
+
 Flag:
 `PCTF{[BOTTOM TEXT]}`
 
