@@ -1,8 +1,7 @@
 ## Challenge Name: `coregasm / co`
+
 Category: Rev
-
 Points: 25
-
 Solves: 107
 
 Challenge Description: 
@@ -17,6 +16,7 @@ The challenge provided us with a binary and it's core dump.
 
 Opening up the binary in Binary Ninja, I saw 4 flags being printed, which all used a global buffer defined as the input. The global buffer was filled with random data in the beginning.
 ![binary's main function](https://ergoadams.github.io/writeups/plaidctf2022/images/coregasm.png "binary's main function")
+
 ### Solution
 Using gdb, I was able to extract the final values in the global buffer.
 From there I was able to just rewrite the flag calculation function in python and run it.

@@ -1,8 +1,7 @@
 ## Challenge Name: `i_c_u / hyperopia`
+
 Category: Misc
-
 Points: 200
-
 Solves: 71
 
 Challenge Description: 
