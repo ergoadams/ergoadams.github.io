@@ -4,16 +4,17 @@ Points: 200
 Solves: 71
 
 Challenge Description: 
-```In the Plaidiverse, we will soon need to deal with zillions of exabytes of data. 
+```
+In the Plaidiverse, we will soon need to deal with zillions of exabytes of data. 
 For proactive future-proof bandwidth utilization, we organize similar data together, 
 enabling multi-modal analysis and semantic compression at scale. 
 As the first of many upcoming products under this umbrella, 
 we introduce i_c_u: the image-collation-utility library. 
 icu.chal.pwni.ng:1337
 ```
+The challenge provided us with a rust script that is running on the server, also two images with the texts `sudo please`and `give me the flag` on them.
 From the rust script I was able to figure out that to get the flag you must provide two images, that when OCR-d get the text of `give me the flag`. The images must also have a different hash and have the difference of only 1 bit.
-
-The image hash is calculated by resizing and grayscaling the image. [(Refernce for the hash)](http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html)
+The image hash is calculated by resizing and grayscaling the image. [(Reference for the hash)](http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html)
 
 ### Approach
 
@@ -22,8 +23,12 @@ I had to use `.jpg` images, cause `.png` files have checksums that prevent chang
 
 ### Solution
 Solution images used:
+
   ![solution image 1](https://ergoadams.github.io/writeups/plaidctf2022/images/icu1.jpg "Solution image 1")
   ![solution image 2](https://ergoadams.github.io/writeups/plaidctf2022/images/icu2.jpg "Solution image2")
+
+Flag:
+`PCTF{eye_eye_captain_7380e97c32053fb6}`
 
 ---
 [Back to home](https://ergoadams.github.io/writeups/plaidctf2022/)
