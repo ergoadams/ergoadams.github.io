@@ -19,12 +19,12 @@ The challenge provided us with an OpenTTD save file.
 After a quick visit to OpenTTD's webpage to download the latest version I was ready to open up the save file. I was shocked by massive amount of rails. It took me a while to scroll through the map without zooming out the first time.  
 ![Minimap](https://ergoadams.github.io/writeups/googlectf2022/images/minimap.png "Minimap")  
 Seeing what seemed like 32 inputs and a single output I understood what it was: a similar challenge to Google CTF 2019 Minetest challenge. Quick recap to LiveOverflow's channel to refresh my mind with the approach he took.  
-Step 1: Parsing the map.
+**Step 1: Parsing the map.**  
 What I thought would be a little glance at a hardware challenge turned into me writing a map parser for OpenTTD pretty fast.  
 Looking at different projects on Github, I found OpenTTD Surveyor, that can make renders of an OpenTTD map. Running that script on my potato PC just hung it. Oh well...  
 Picking out the important parts from that project, I managed to extract data about rails in the map. I was well on my way to solve the challenge!  
 After messing around with the different logic gates implemented in OpenTTD's logic, I came up with replacements in the ASCII version of the map to simplify the logic gates.  
-Step 2: Solving the circuit.  
+**Step 2: Solving the circuit.**  
 I had never touched z3 before, I'm glad LiveOverflow posted his script on Github. Whew... Looking back at it now, z3 is pretty simple and I'm sure I'll find uses for it other than CTFs. Applied physics in university? Here I come!  
 With all of that done, it's time to write a solution script and run it.
 
