@@ -25,7 +25,7 @@ Looking at different projects on Github, I found OpenTTD Surveyor, that can make
 Picking out the important parts from that project, I managed to extract data about rails in the map. I was well on my way to solve the challenge!  
 After messing around with the different logic gates implemented in OpenTTD's logic, I came up with replacements in the ASCII version of the map to simplify the logic gates.  
 **Step 2: Solving the circuit.**  
-I had never touched z3 before, I'm glad LiveOverflow posted his script on Github. Whew... Looking back at it now, z3 is pretty simple and I'm sure I'll find uses for it other than CTFs. Applied physics in university? Here I come!  
+I had never touched [z3](https://github.com/Z3Prover/z3)z3 (a theorem prover) before, I'm glad LiveOverflow posted his script on Github. Whew... Looking back at it now, z3 is pretty simple and I'm sure I'll find uses for it other than CTFs. Applied physics in university? Here I come!  
 With all of that done, it's time to write a solution script and run it.
 
 ### Solution
@@ -312,6 +312,12 @@ solved = solve(circuit==True)
 
 Flag:
 `CTF{11100010101000111000101010100011}`
+
+### Extra
+
+A high quality render of the full map made from the saved ASCII version of the map.  
+Be careful, the image is 12050x37460 pixels in size!  
+[Link to the image](https://ergoadams.github.io/writeups/googlectf2022/images/render.png)
 
 ---
 [Back to home](https://ergoadams.github.io/writeups/googlectf2022/)
