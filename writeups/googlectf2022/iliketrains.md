@@ -15,7 +15,7 @@ The challenge provided us with an OpenTTD save file.
 
 ### Approach
 
-"OooOOh... An OpenTTD challenge!" I thought to myself. Also in the hardware category? What could it be?  
+"OooOOh... An [OpenTTD](https://www.openttd.org/) challenge!" I thought to myself. Also in the hardware category? What could it be?  
 After a quick visit to OpenTTD's webpage to download the latest version I was ready to open up the save file. I was shocked by massive amount of rails. It took me a while to scroll through the map without zooming out the first time.  
 ![Minimap](https://ergoadams.github.io/writeups/googlectf2022/images/minimap.png "Minimap")  
 Seeing what seemed like 32 inputs and a single output I understood what it was: a similar challenge to Google CTF 2019 Minetest challenge. Quick recap to LiveOverflow's channel to refresh my mind with the approach he took.  
@@ -25,7 +25,7 @@ Looking at different projects on Github, I found OpenTTD Surveyor, that can make
 Picking out the important parts from that project, I managed to extract data about rails in the map. I was well on my way to solve the challenge!  
 After messing around with the different logic gates implemented in OpenTTD's logic, I came up with replacements in the ASCII version of the map to simplify the logic gates.  
 **Step 2: Solving the circuit.**  
-I had never touched [z3](https://github.com/Z3Prover/z3)z3 (a theorem prover) before, I'm glad LiveOverflow posted his script on Github. Whew... Looking back at it now, z3 is pretty simple and I'm sure I'll find uses for it other than CTFs. Applied physics in university? Here I come!  
+I had never touched [z3](https://github.com/Z3Prover/z3) (a theorem prover) before, I'm glad LiveOverflow posted his script on Github. Whew... Looking back at it now, z3 is pretty simple and I'm sure I'll find uses for it other than CTFs. Applied physics in university? Here I come!  
 With all of that done, it's time to write a solution script and run it.
 
 ### Solution
