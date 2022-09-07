@@ -19,13 +19,13 @@
       </script>
 </head>
 <body>
-    <zero-md id="source" src="kompleksarvud.md"></zero-md>
+    <zero-md id="app" src="kompleksarvud.md" no-shadow></zero-md>
     <!-- Load the MathJax library AFTER markdown is rendered -->
     <script>
-        source.addEventListener('zero-md-rendered', () => {
+        app.addEventListener('zero-md-rendered', () => {
           let el = document.createElement('script')
           el.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'
           document.head.appendChild(el)
         })
-      </script>
+    </script>
 </body>
